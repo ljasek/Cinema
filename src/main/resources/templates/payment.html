@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta firstName="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta firstName="description" content=""/>
+    <meta firstName="author" content=""/>
+    <title>Płatność</title>
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="/images/favicon.ico" rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon" />
+    <link href="/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css" />
+    <link href="/css/payment.css" rel="stylesheet" th:href="@{/css/payment.css}" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel="stylesheet" th:href="@{http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900}" type='text/css' media='all' />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel="stylesheet"	th:href="@{http://fonts.googleapis.com/css?family=Montserrat:400,700}" type='text/css' media='all' />
+</head>
+<body>
+
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" th:href="@{/}">
+                        <img th:src="@{/images/logo.png}" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<h1>FORMULARZ PŁATNOŚCI</h1>
+
+<div class="containerw3layouts-agileits">
+    <div id='progress'><div id='progress-complete'></div></div>
+    <form id="SignupForm" action="#" th:action="@{/platnosc}" th:object="${orderDTO}" method="post">
+        <fieldset>
+            <div class="form-group agileinfo">
+                <label for="Name">Imię</label>
+                <input id="Name" type="text" class="form-control" th:field="*{name}" placeholder="Imię" required = "required" />
+            </div>
+            <div class="form-group">
+                <label for="Surname">Nazwisko</label>
+                <input id="Surname" type="text" class="form-control w3-agileits" th:field="*{surname}" placeholder="Nazwisko" required = "required" />
+            </div>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input id="Email" type="email" class="form-control" th:field="*{email}" placeholder="Email" required = "required" />
+            </div>
+        </fieldset>
+        <fieldset class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="NameOnCard" class="col-sm-2 agileinfo card-lable control-label">Nazwa karty</label>
+                <div class="col-sm-10">
+                    <input id="NameOnCard" type="text" class="form-control" placeholder="Nazwa karty" required = "required" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CardNumber" class="col-sm-2 agileits-w3layouts number-lable control-label">Numer karty</label>
+                <div class="col-sm-10">
+                    <input id="CardNumber" type="password" class="form-control" pattern="[0-9]{16}" maxlength="16" placeholder="Numer karty" required = "required" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CreditcardMonth" class="col-sm-2 control-label">Valid Thru</label>
+                <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <select id="CreditcardMonth" class="form-control w3-agileits col-sm-2">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            <select id="CreditcardYear" class="form-control agileits-w3layouts">
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CVV" class="col-sm-2 agileits-w3layouts control-label">CVV</label>
+                <div class="col-sm-4">
+                    <input id="CVV" type="password" class="form-control" pattern="[0-9]{3}" maxlength="3" size="3" placeholder="CVV" required = "required" />
+                </div>
+            </div>
+        </fieldset>
+        <p>
+
+            <input type="checkbox" hidden = "true" th:checked="${true}" name="paid" />
+            <button id="SaveAccount" class="btn wthree btn-primary submit">PŁACĘ</button>
+        </p>
+    </form>
+</div>
+
+<div class="footer">
+    <p>&copy; 2017 Łukasz Jasek</p>
+</div>
+
+<script src="/js/jquery-2.1.3.min.js" th:src="@{/js/jquery-2.1.3.min.js}"></script>
+<script src="/js/jquery.validate.min.js" th:src="@{/js/jquery.validate.min.js}"></script>
+<script src="/js/jquery.formtowizard.js" th:src="@{/js/jquery.formtowizard.js}"></script>
+<script src="/js/payment.js" th:src="@{/js/payment.js}"></script>
+
+</body>
+</html>

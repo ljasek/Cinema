@@ -1,0 +1,482 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, nav ul, nav li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+ol, ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.txt-rt {
+    text-align: right;
+}
+
+.txt-lt {
+    text-align: left;
+}
+
+.txt-center {
+    text-align: center;
+}
+
+.float-rt {
+    float: right;
+}
+
+.float-lt {
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
+.pos-relative {
+    position: relative;
+}
+
+.pos-absolute {
+    position: absolute;
+}
+
+.vertical-base {
+    vertical-align: baseline;
+}
+
+.vertical-top {
+    vertical-align: top;
+}
+
+.underline {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    margin: 0 0 20px 0;
+}
+
+nav.vertical ul li {
+    display: block;
+}
+
+nav.horizontal ul li {
+    display: inline-block;
+}
+
+img {
+    max-width: 100%;
+}
+
+body {
+    background: url("../images/payment.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+body a, body a:hover, input[type="button"], input[type="submit"], input[type="submit"]:hover, button, button:hover {
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    margin: 50px 0 100px;
+    color: #FFF;
+}
+
+.containerw3layouts-agileits {
+    width: 40%;
+    margin: 0 auto;
+}
+
+legend {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    text-align: left;
+    color: #FFF;
+    margin-bottom: 20px;
+}
+
+fieldset {
+    text-align: left;
+}
+
+label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #EEE;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #ccc;
+    border-radius: 0;
+    height: inherit;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: none;
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.form-horizontal .control-label {
+    padding: 0;
+    padding-top: 12px;
+}
+
+.footer {
+    padding: 2.3em 0;
+}
+
+.footer p {
+    font-size: .9em;
+    color: white;
+}
+
+.footer p a {
+    color: #d20962;
+}
+
+.footer p a:hover {
+    text-decoration: underline;
+}
+
+button.btn {
+    padding: 10px 40px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #000;
+    border: 1px solid #FFF;
+    border-radius: 0;
+    font-weight: lighter;
+}
+
+button.btn:hover {
+    background-color: #FFF;
+    color: #000;
+    font-weight: bolder;
+}
+
+button.btn-default {
+    color: #FFF;
+}
+
+::-webkit-input-placeholder {
+    color: #FFF !important;
+}
+
+::-moz-placeholder {
+    color: #FFF !important;
+}
+
+::-moz-placeholder {
+    color: #FFF !important;
+}
+
+::-ms-input-placeholder {
+    color: #FFF !important;
+}
+
+.wrap {
+    max-width: 980px;
+    margin: 10px auto 0;
+}
+
+#steps {
+    margin: 80px 0 0 0;
+}
+
+.commands {
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.prev {
+    float: left
+}
+
+.error {
+    color: #FFC107;
+}
+
+.next, .submit {
+    float: right
+}
+
+#progress {
+    position: relative;
+    height: 5px;
+    background-color: #eee;
+    margin-bottom: 50px;
+}
+
+#progress-complete {
+    border: 0;
+    position: absolute;
+    height: 5px;
+    min-width: 10px;
+    background-color: #F44336;
+    transition: width .2s ease-in-out;
+}
+
+@media screen and (max-width: 966px) {
+    #progress {
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    #progress {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    h1 {
+        font-size: 50px;
+        margin: 150px 0;
+    }
+
+    .containerw3layouts-agileits {
+        width: 35%;
+    }
+}
+
+@media screen and (max-width: 1680px) {
+    h1 {
+        font-size: 50px;
+        margin: 125px 0;
+    }
+
+    .containerw3layouts-agileits {
+        width: 38%;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    h1 {
+        font-size: 40px;
+        margin: 50px 0 100px;
+    }
+
+    .containerw3layouts-agileits {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .containerw3layouts-agileits {
+        width: 43%;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    h1 {
+        font-size: 40px;
+        margin: 50px 0 75px;
+    }
+
+    .containerw3layouts-agileits {
+        width: 45%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .containerw3layouts-agileits {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .containerw3layouts-agileits {
+        width: 55%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .containerw3layouts-agileits {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 966px) {
+    h1 {
+        font-size: 35px;
+        margin: 35px 0 50px;
+    }
+
+    .containerw3layouts-agileits {
+        width: 62%;
+    }
+
+    legend {
+        font-size: 23px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    legend {
+        font-size: 20px;
+    }
+
+    .containerw3layouts-agileits {
+        width: 66%;
+    }
+}
+
+@media screen and (max-width: 853px) {
+    .form-horizontal .control-label {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    label.card-lable.control-label {
+        padding-top: 4px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .containerw3layouts-agileits {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .col-sm-10, .col-sm-4 {
+        padding: 0;
+    }
+
+    .form-horizontal .form-group {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    label.card-lable.control-label {
+        padding-top: 0;
+    }
+
+    fieldset.form-horizontal .form-group {
+        margin-bottom: 5px;
+    }
+
+    .error {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    h1 {
+        font-size: 30px;
+        margin: 30px 0 40px;
+    }
+
+    label {
+        font-size: 13px;
+    }
+
+    .form-control {
+        padding: 8px 10px;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+    button.btn {
+        padding: 7px 35px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    h1 {
+        font-size: 27px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    .containerw3layouts-agileits {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    .containerw3layouts-agileits {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h1 {
+        margin: 25px 0 30px;
+    }
+
+    .containerw3layouts-agileits {
+        width: 90%;
+    }
+
+    legend {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .commands {
+        margin-top: 20px;
+    }
+}

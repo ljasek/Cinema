@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta firstName="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta firstName="description" content=""/>
+    <meta firstName="author" content=""/>
+    <title th:text="${orderDTO.film}"></title>
+    <link href="/images/favicon.ico" rel="shortcut icon" th:href="@{/images/favicon.ico}" type="image/x-icon" />
+    <link href="/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css" />
+    <link href="/css/animate.css" rel="stylesheet" th:href="@{/css/animate.css}" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" th:href="@{/css/style.css}" type="text/css" />
+    <link href="/css/film.css" rel="stylesheet" th:href="@{/css/film.css}" type="text/css" />
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet" th:href="@{/font-awesome/css/font-awesome.css}" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' th:href="@{http://fonts.googleapis.com/css?family=Pacifico}" type='text/css'/>
+</head>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+<div id="preloader">
+    <div id="load"></div>
+</div>
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand" th:href="@{/}">
+                        <img th:src="@{/images/logo.png}" alt="" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<section id="screen">
+    <div class="container">
+        <div class="row">
+            <div class="youtube-video">
+                <iframe width="640" height="360" src=""></iframe>
+            </div>
+        </div>
+        <div class="film-name hidden" th:text="${orderDTO.film}"></div>
+        <div class="row">
+            <div class="schedule col-md-4 col-md-offset-4">
+                <span id="session" class="left">Godzina:</span>
+                <form action="#" th:action="@{/film}" th:object="${orderDTO}" method="post">
+                    <select th:field="*{time}" >
+                        <option th:each="sch : ${schedule}"
+                                th:value="${sch}"
+                                th:text="${sch}" />
+                    </select>
+                    <input type="submit" value="Dalej"/>
+                </form>
+                <p th:text="${message}"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="footer">
+    <p>&copy; 2017 Łukasz Jasek</p>
+</div>
+
+<script src="/js/jquery-2.1.3.min.js" th:src="@{/js/jquery-2.1.3.min.js}"></script>
+<script src="/js/film.js" th:src="@{/js/film.js}"></script>
+<script src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="/js/jquery.easing.min.js" th:src="@{/js/jquery.easing.min.js}"></script>
+<script src="/js/jquery.scrollTo.js" th:src="@{/js/jquery.scrollTo.js}"></script>
+<script src="/js/wow.min.js" th:src="@{/js/wow.min.js}"></script>
+<script src="/js/custom.js" th:src="@{/js/custom.js}"></script>
+
+</body>
+</html>
