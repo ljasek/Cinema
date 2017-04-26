@@ -63,6 +63,8 @@
     <script src="/js/jquery.easing.min.js" th:src="@{/js/jquery.easing.min.js}"></script>
     <script src="/js/jquery.dataTables.min.js" th:src="@{/js/jquery.dataTables.min.js}"></script>
     <script src="/js/dataTables.bootstrap.min.js" th:src="@{/js/dataTables.bootstrap.min.js}"></script>
+    <script src="/js/validator.min.js" th:src="@{/js/validator.min.js}"></script>
+    <script src="/js/toastr.min.js" th:src="@{/js/toastr.min.js}"></script>
 
     <script th:inline="javascript">
         /*<![CDATA[*/
@@ -95,6 +97,29 @@
         /*]]>*/
     </script>
 
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function() {
+
+            var result = /*[[${alert}]]*/ '';
+
+            switch (result) {
+                case 'confirmEmail':
+                    toastr.info('Na podany adres email wysłaliśmy link do aktywacji konta', {timeOut: 6000})
+                    break;
+                case 'validToken':
+                    toastr.success('Dziękujemy za rejestrację, konto zostało aktywowane')
+                    break;
+                case 'expiredToken':
+                    toastr.error('Token wygasł!', {timeOut: 6000})
+                    break;
+                case 'invalidToken':
+                    toastr.error('Niewłaściwy token!', {timeOut: 6000})
+                    break;
+            }
+        });
+        /*]]>*/
+    </script>
 </div>
 
 </body>

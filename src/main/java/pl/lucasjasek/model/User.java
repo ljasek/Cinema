@@ -34,7 +34,7 @@ public class User implements UserDetails{
     @Column(name = "email", nullable = false, unique = true)
     private String email;
     private String password;
-    private boolean enabled=true;
+    private boolean enabled;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetailList;
