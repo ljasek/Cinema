@@ -15,7 +15,7 @@ Run the app:
     Alternative way to run via command line if we already have configuration:
     On project root:
     mvn install
-    java -jar target/CinemaProject-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+    java -jar target/CinemaProject-1.0.1.jar --spring.profiles.active=prod
     
 The app will be available at `http://localhost:8080/CinemaProject/`. 
 
@@ -23,7 +23,7 @@ The app will be available at `http://localhost:8080/CinemaProject/`.
 - Create an administrator module in Angular 2 + TypeScript and solve the problem of manually editing the database.
 - Adding possibility to reserve a seat for a specified time
 - Adding log in via social networking sites.
-- Adding activate a new account by email
+- Adding activate a new account by email (added)
 - More user account functionality
 - Adding http/https channel security
 - Reset password
@@ -32,24 +32,25 @@ The app will be available at `http://localhost:8080/CinemaProject/`.
 
 ## Tech stack and libraries
 ### Backend
-- Spring Boot
-- Spring MVC
-- Spring Data JPA
-- Spring Security
-- Hibernate
-- MySQL
-- H2
-- Hikari CP
-- iText PDF
-- Maven
-- Java 1.8
-- IntelliJ
+- [Spring Boot](https://projects.spring.io/spring-boot/)
+- [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html)
+- [Spring Data JPA](http://projects.spring.io/spring-data-jpa/)
+- [Spring Security](https://projects.spring.io/spring-security/)
+- [Hibernate](http://hibernate.org/)
+- [MySQL](https://www.mysql.com/)
+- [H2](http://www.h2database.com/html/main.html)
+- [Hikari CP](https://brettwooldridge.github.io/HikariCP/)
+- [iText PDF](http://itextpdf.com/)
+- [Maven](https://maven.apache.org/)
+- [Java 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [IntelliJ](https://www.jetbrains.com/idea/)
 
 ### Frontend
-- Thymeleaf
-- HTML5
-- CSS3
-- Bootstrap
-- jQuery
-- jQuery DataTables
+- [Thymeleaf](http://www.thymeleaf.org/)
+- [HTML5](https://www.w3schools.com/html/html5_intro.asp)
+- [CSS3](https://www.w3schools.com/css/default.asp)
+- [Bootstrap](http://getbootstrap.com/)
+- [jQuery](https://jquery.com/)
+- [jQuery DataTables](https://datatables.net/)
+- [Toastr](http://codeseven.github.io/toastr/)
 ---
