@@ -19,6 +19,11 @@ Run the app:
     
 The app will be available at `http://localhost:8080/CinemaProject/`. 
 
+##### Note
+For proper operation of email sending mechanism it is required to:</br>
+1st: https://www.google.com/settings/security/lesssecureapps : Should be turned on.</br>
+2nd: https://accounts.google.com/b/0/displayunlockcaptcha
+
 ## Plans for further application development
 - Create an administrator module in Angular 2 + TypeScript and solve the problem of manually editing the database.
 - Adding possibility to reserve a seat for a specified time
