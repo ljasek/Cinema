@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta firstName="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta firstName="description" content=""/>
+	<meta firstName="author" content=""/>
+	<title>Błąd 404 - Podana strona nie istnieje</title>
+	<link href="/css/404.css" rel="stylesheet" th:href="@{/css/404.css}" type="text/css" media="all" />
+	<link href='http://fonts.googleapis.com/css?family=Ropa+Sans:400,400i&amp;subset=latin-ext' rel='stylesheet' th:href="@{http://fonts.googleapis.com/css?family=Ropa+Sans:400,400i&amp;subset=latin-ext}" type='text/css'/>
+</head>
+
+<body>
+<div class="header">
+	<h1>Oops...</h1>
+</div>
+<div class="main">
+	<div class="info">
+		<h3>PRZEPRASZAMY!</h3>
+		<h2>4<img th:src="@{/images/404.gif}" alt="image"/>4</h2>
+		<p>STRONA O PODANYM ADRESIE NIE ISTNIEJE!</p>
+	</div>
+</div>
+<div class="footer">
+	<p>&copy; 2017 Łukasz Jasek</p>
+</div>
+
+</body>
+</html>

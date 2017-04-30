@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService{
 
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
-    private static final String TOKEN_INVALID = "invalidToken";
-    private static final String TOKEN_EXPIRED = "expiredToken";
-    private static final String TOKEN_VALID = "validToken";
+    public static final String TOKEN_INVALID = "invalidToken";
+    public static final String TOKEN_EXPIRED = "expiredToken";
+    public static final String TOKEN_VALID = "validToken";
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;

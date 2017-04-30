@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import pl.lucasjasek.service.impl.UserSecurityService;
 
@@ -21,6 +23,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserSecurityService userSecurityService;
+
+    @Autowired
+    PersistentTokenRepository tokenRepository;
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
+    }
 
     private static final String SALT = "salt";
 
@@ -43,13 +53,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable().cors().disable()
                 .formLogin().failureUrl("/index?error").defaultSuccessUrl("/panelUzytkownika").loginPage("/logowanie").permitAll()
                 .and()
+                .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository).tokenValiditySeconds(86400)
+                .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/index?logout");
-
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//    	 auth.inMemoryAuthentication().withUser("user").password("password").roles("USER"); //This is in-memory authentication
-        auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
+    @Bean
+    public PersistentTokenBasedRememberMeServices getPersistentTokenBasedRememberMeServices() {
+        PersistentTokenBasedRememberMeServices tokenBasedService = new PersistentTokenBasedRememberMeServices(
+                "remember-me", userSecurityService, tokenRepository);
+        return tokenBasedService;
     }
 }
