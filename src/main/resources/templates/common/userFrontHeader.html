@@ -105,19 +105,32 @@
 
             switch (result) {
                 case 'confirmEmail':
-                    toastr.info('Na podany adres email wysłaliśmy link do aktywacji konta', {timeOut: 6000})
+                    toastr.options = {"timeOut": "6000"}
+                    toastr.info('Na podany adres email wysłaliśmy link do aktywacji konta')
                     break;
                 case 'validToken':
+                    toastr.options = {"timeOut": "6000"}
                     toastr.success('Dziękujemy za rejestrację, konto zostało aktywowane')
                     break;
                 case 'expiredToken':
-                    toastr.error('Token wygasł!', {timeOut: 6000})
+                    toastr.options = {"closeButton": true, "timeOut": "0", "extendedTimeOut": "0"}
+                    toastr.error('Token wygasł! <div><button type="button" class="btn btn-link" onclick="resendToken()" style="color: #fff">Wygeneruj nowy token</button></div>')
                     break;
                 case 'invalidToken':
-                    toastr.error('Niewłaściwy token!', {timeOut: 6000})
+                    toastr.options = {"timeOut": "6000"}
+                    toastr.error('Niewłaściwy token!')
                     break;
             }
         });
+
+        function resendToken() {
+
+            var token = /*[[${token}]]*/ '';
+            var serverContext = "http://localhost:8080/CinemaProject/potwierdzenieRejestracji-nowyToken.html?token=";
+
+            window.location.href = serverContext + token;
+        }
+
         /*]]>*/
     </script>
 </div>

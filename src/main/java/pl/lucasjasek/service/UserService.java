@@ -3,6 +3,7 @@ package pl.lucasjasek.service;
 
 import pl.lucasjasek.model.User;
 import pl.lucasjasek.model.security.UserRole;
+import pl.lucasjasek.model.security.VerificationToken;
 
 import java.util.Set;
 
@@ -27,4 +28,8 @@ public interface UserService {
     void createVerificationToken(User user, String token);
 
     String validateVerificationToken(String token);
+
+    VerificationToken generateNewVerificationToken(String token);
+
+    User getUser(String verificationToken);
 }

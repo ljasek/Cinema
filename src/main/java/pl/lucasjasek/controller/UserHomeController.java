@@ -13,8 +13,10 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.lucasjasek.model.User;
 import pl.lucasjasek.model.security.UserRole;
+import pl.lucasjasek.model.security.VerificationToken;
 import pl.lucasjasek.registration.OnRegistrationCompleteEvent;
 import pl.lucasjasek.repositories.RoleRepository;
+import pl.lucasjasek.service.SendEmailService;
 import pl.lucasjasek.service.UserService;
 
 import java.security.Principal;
@@ -27,12 +29,15 @@ public class UserHomeController {
     private final UserService userService;
     private final RoleRepository roleRepository;
     private final ApplicationEventPublisher eventPublisher;
+    private final SendEmailService emailService;
 
     @Autowired
-    public UserHomeController(UserService userService, RoleRepository roleRepository, ApplicationEventPublisher eventPublisher) {
+    public UserHomeController(UserService userService, RoleRepository roleRepository, ApplicationEventPublisher eventPublisher,
+                              SendEmailService emailService) {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.eventPublisher = eventPublisher;
+        this.emailService = emailService;
     }
 
     @GetMapping("/logowanie")
@@ -44,11 +49,12 @@ public class UserHomeController {
     }
 
     @GetMapping("/rejestracja")
-    public String signup(@ModelAttribute("alert") String alert, Model model) {
+    public String signup(@ModelAttribute("alert") String alert, @ModelAttribute("token") String token, Model model) {
         User user = new User();
 
         model.addAttribute("user", user);
         model.addAttribute("alert", alert);
+        model.addAttribute("token", token);
 
         return "signup";
     }
@@ -95,8 +101,21 @@ public class UserHomeController {
         }
 
         ra.addFlashAttribute("alert", result);
+        ra.addFlashAttribute("token", token);
 
         return "redirect:/rejestracja";
+    }
+
+    @GetMapping("/potwierdzenieRejestracji-nowyToken")
+    public String confirmRegistrationNewToken(@RequestParam("token") String existingToken, RedirectAttributes ra) {
+
+        VerificationToken newToken = userService.generateNewVerificationToken(existingToken);
+        User user = userService.getUser(newToken.getToken());
+        emailService.resendRegistrationToken(newToken, user);
+
+        ra.addFlashAttribute("alert", "confirmEmail");
+
+        return "redirect:/logowanie";
     }
 
     @GetMapping("/panelUzytkownika")

@@ -1,5 +1,6 @@
 package pl.lucasjasek.model.security;
 
+import pl.lucasjasek.model.AbstractEntity;
 import pl.lucasjasek.model.User;
 
 import javax.persistence.Entity;
@@ -14,13 +15,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class VerificationToken {
+public class VerificationToken extends AbstractEntity {
 
-    private static final int EXPIRATION = 12 * 60;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private static final int EXPIRATION = 12 * 60; // 12h
 
     private String token;
 
@@ -48,15 +45,11 @@ public class VerificationToken {
     }
 
 
-    public Long getId() {
-        return id;
-    }
-
     public String getToken() {
         return token;
     }
 
-    public void setToken(final String token) {
+    public void setToken(String token) {
         this.token = token;
     }
 
@@ -64,7 +57,7 @@ public class VerificationToken {
         return user;
     }
 
-    public void setUser(final User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -72,7 +65,7 @@ public class VerificationToken {
         return expiryDate;
     }
 
-    public void setExpiryDate(final Date expiryDate) {
+    public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -81,5 +74,18 @@ public class VerificationToken {
         cal.setTime(new Timestamp(cal.getTime().getTime()));
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(cal.getTime().getTime());
+    }
+
+    public void updateToken(String token) {
+        this.token = token;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
+    }
+
+    @Override
+    public String toString() {
+        return "VerificationToken{" +
+                "token='" + token + '\'' +
+                ", expiryDate=" + expiryDate +
+                '}';
     }
 }

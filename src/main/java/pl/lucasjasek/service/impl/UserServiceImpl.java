@@ -17,6 +17,7 @@ import pl.lucasjasek.service.UserService;
 
 import java.util.Calendar;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -79,9 +80,27 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User getUser(String verificationToken) {
+        VerificationToken token = tokenRepository.findByToken(verificationToken);
+
+        if (token != null) {
+            return token.getUser();
+        }
+        return null;
+    }
+
+    @Override
     public void createVerificationToken(User user, String token) {
         VerificationToken myToken = new VerificationToken(token, user);
         tokenRepository.save(myToken);
+    }
+
+    @Override
+    public VerificationToken generateNewVerificationToken(String existingVerificationToken) {
+        VerificationToken newToken = tokenRepository.findByToken(existingVerificationToken);
+        newToken.updateToken(UUID.randomUUID().toString());
+        newToken = tokenRepository.save(newToken);
+        return newToken;
     }
 
     @Override
@@ -96,12 +115,12 @@ public class UserServiceImpl implements UserService{
         Calendar cal = Calendar.getInstance();
 
         if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-            tokenRepository.delete(verificationToken);
             return TOKEN_EXPIRED;
         }
 
         user.setEnabled(true);
         userRepository.save(user);
+        tokenRepository.delete(verificationToken);
 
         return TOKEN_VALID;
     }
