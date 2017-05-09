@@ -5,9 +5,6 @@ import pl.lucasjasek.model.User;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import java.sql.Timestamp;
@@ -17,7 +14,7 @@ import java.util.Date;
 @Entity
 public class VerificationToken extends AbstractEntity {
 
-    private static final int EXPIRATION = 12 * 60; // 12h
+    private static final int EXPIRATION = 30; // 30 min.
 
     private String token;
 

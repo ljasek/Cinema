@@ -8,15 +8,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.lucasjasek.model.User;
-import pl.lucasjasek.model.security.UserRole;
 import pl.lucasjasek.model.security.VerificationToken;
 import pl.lucasjasek.repositories.RoleRepository;
 import pl.lucasjasek.repositories.UserRepository;
 import pl.lucasjasek.repositories.VerificationTokenRepository;
 import pl.lucasjasek.service.UserService;
 
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -59,22 +58,16 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User createUser(User user, Set<UserRole> userRoles) {
+    public User createUser(User user) {
         User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
             LOG.info("Użytkownik o nazwie {} już istnieje. ", user.getUsername());
-        } else {
-            String encryptedPassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encryptedPassword);
-
-            for (UserRole ur : userRoles) {
-                roleRepository.save(ur.getRole());
-            }
-
-            user.getUserRoles().addAll(userRoles);
-            localUser = userRepository.save(user);
         }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_USER")));
+        localUser = userRepository.save(user);
 
         return localUser;
     }

@@ -12,30 +12,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.lucasjasek.model.User;
-import pl.lucasjasek.model.security.UserRole;
 import pl.lucasjasek.model.security.VerificationToken;
 import pl.lucasjasek.registration.OnRegistrationCompleteEvent;
-import pl.lucasjasek.repositories.RoleRepository;
 import pl.lucasjasek.service.SendEmailService;
 import pl.lucasjasek.service.UserService;
 
 import java.security.Principal;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class UserHomeController {
 
     private final UserService userService;
-    private final RoleRepository roleRepository;
     private final ApplicationEventPublisher eventPublisher;
     private final SendEmailService emailService;
 
     @Autowired
-    public UserHomeController(UserService userService, RoleRepository roleRepository, ApplicationEventPublisher eventPublisher,
-                              SendEmailService emailService) {
+    public UserHomeController(UserService userService, ApplicationEventPublisher eventPublisher, SendEmailService emailService) {
         this.userService = userService;
-        this.roleRepository = roleRepository;
         this.eventPublisher = eventPublisher;
         this.emailService = emailService;
     }
@@ -73,19 +66,16 @@ public class UserHomeController {
             }
 
             return "signup";
-        } else {
-            Set<UserRole> userRoles = new HashSet<>();
-            userRoles.add(new UserRole(user, roleRepository.findByName("ROLE_USER")));
-
-            User registered = userService.createUser(user, userRoles);
-
-            String appUrl = request.getContextPath();
-            eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
-
-            ra.addFlashAttribute("alert", "confirmEmail");
-
-            return "redirect:/logowanie";
         }
+
+        User registered = userService.createUser(user);
+
+        String appUrl = request.getContextPath();
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
+
+        ra.addFlashAttribute("alert", "confirmEmail");
+
+        return "redirect:/logowanie";
     }
 
     @GetMapping("/potwierdzenieRejestracji")

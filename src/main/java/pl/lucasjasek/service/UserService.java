@@ -2,10 +2,7 @@ package pl.lucasjasek.service;
 
 
 import pl.lucasjasek.model.User;
-import pl.lucasjasek.model.security.UserRole;
 import pl.lucasjasek.model.security.VerificationToken;
-
-import java.util.Set;
 
 public interface UserService {
 
@@ -21,7 +18,7 @@ public interface UserService {
 
     void save (User user);
 
-    User createUser(User user, Set<UserRole> userRoles);
+    User createUser(User user);
 
     User saveUser (User user);
 

@@ -31,7 +31,7 @@ public class OrderDetail extends AbstractEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Boolean paid;
+    private boolean paid;
 
 
     public OrderDetail() {
@@ -61,11 +61,11 @@ public class OrderDetail extends AbstractEntity {
         this.session = session;
     }
 
-    public Boolean getPaid() {
+    public boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setPaid(boolean paid) {
         this.paid = paid;
     }
 

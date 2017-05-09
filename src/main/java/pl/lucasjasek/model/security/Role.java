@@ -1,37 +1,36 @@
 package pl.lucasjasek.model.security;
 
 
-import javax.persistence.CascadeType;
+import pl.lucasjasek.model.AbstractEntity;
+import pl.lucasjasek.model.User;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.Collection;
 
 @Entity
-public class Role {
-
-    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int roleId;
+public class Role extends AbstractEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<UserRole> userRoles = new HashSet<>();
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
+
+    @ManyToMany
+    @JoinTable(name = "roles_privileges",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "privilege_id"))
+    private Collection<Privilege> privileges;
 
     public Role() {
-
     }
 
-    public int getRoleId() {
-        return roleId;
+    public Role(String name) {
+        this.name = name;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
 
     public String getName() {
         return name;
@@ -41,11 +40,27 @@ public class Role {
         this.name = name;
     }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    public Collection<User> getUsers() {
+        return users;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setUsers(Collection<User> users) {
+        this.users = users;
+    }
+
+    public Collection<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(Collection<Privilege> privileges) {
+        this.privileges = privileges;
+    }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "name='" + name + '\'' +
+                ", id=" + super.getId().toString() +
+                "}";
     }
 }
