@@ -120,6 +120,22 @@
                     toastr.options = {"timeOut": "6000"}
                     toastr.error('Niewłaściwy token!')
                     break;
+                case 'resetPasswordEmail':
+                    toastr.options = {"timeOut": "6000"}
+                    toastr.info('Na podany adres email wysłaliśmy link do zresetowania hasła')
+                    break;
+                case 'userEmailNotExist':
+                    toastr.options = {"timeOut": "6000"}
+                    toastr.error('Użytkownik o podanym adresie nie istnieje!')
+                    break;
+                case 'expiredPasswordResetToken':
+                    toastr.options = {"timeOut": "6000"}
+                    toastr.error('Token wygasł!')
+                    break;
+                case 'successSavePassword':
+                    toastr.options = {"timeOut": "6000"}
+                    toastr.success('Hasło zostało zmienione')
+                    break;
             }
         });
 

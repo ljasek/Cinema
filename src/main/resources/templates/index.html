@@ -38,11 +38,11 @@
 
             <div class="collapse navbar-collapse navbar-main-collapse">
                 <div  class="col-md-2 right col-md-offset-2 ps"  >
-                    <a sec:authorize="isAnonymous()" th:href="@{/logowanie}">
+                    <a sec:authorize="isAnonymous() || hasAuthority('CHANGE_PASSWORD_PRIVILEGE')" th:href="@{/logowanie}">
                         <button class="btn btn-danger log-btn cl">Zaloguj</button>
                     </a>
-                    <span sec:authorize="isAuthenticated()" sec:authentication="name"></span>
-                    <li class="dropdown" sec:authorize="isAuthenticated()">
+                    <span sec:authorize="hasAuthority('READ_PRIVILEGE')" sec:authentication="name"></span>
+                    <li class="dropdown" sec:authorize="hasAuthority('READ_PRIVILEGE')">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Moje konto <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/panelUzytkownika}">Profil</a></li>

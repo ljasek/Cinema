@@ -187,6 +187,10 @@ hr {
 	padding-bottom: 10px;
 }
 
+.cancel a {
+   color: #5fdaff;
+}
+
 @media (max-width:1366px) {
 	.content-agileits {
     width: 40%;

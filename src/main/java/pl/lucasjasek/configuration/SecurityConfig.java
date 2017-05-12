@@ -43,8 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests()
-                    .antMatchers("/panelUzytkownika**", "/uzytkownik**", "/uzytkownik/**").authenticated()
+               .authorizeRequests()
+                    .antMatchers("/zapisHasla*").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
+                    .antMatchers("/panelUzytkownika**", "/uzytkownik**", "/uzytkownik/**").hasAuthority("READ_PRIVILEGE")
                 .and()
                 .authorizeRequests()
                     .anyRequest().permitAll();

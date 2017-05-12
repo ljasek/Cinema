@@ -6,12 +6,11 @@ import pl.lucasjasek.model.User;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class VerificationToken extends AbstractEntity {
+public class PasswordResetToken extends AbstractEntity {
 
     private static final int EXPIRATION = 30; // 30 min.
 
@@ -23,18 +22,15 @@ public class VerificationToken extends AbstractEntity {
 
     private Date expiryDate;
 
-
-    public VerificationToken() {
+    public PasswordResetToken() {
     }
 
-    public VerificationToken(String token) {
-
+    public PasswordResetToken(String token) {
         this.token = token;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
-    public VerificationToken(String token, User user) {
-
+    public PasswordResetToken(String token, User user) {
         this.token = token;
         this.user = user;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
@@ -67,7 +63,7 @@ public class VerificationToken extends AbstractEntity {
 
     private Date calculateExpiryDate(int expiryTimeInMinutes) {
         Calendar cal = Calendar.getInstance();
-        cal.setTime(new Timestamp(cal.getTime().getTime()));
+        cal.setTimeInMillis(new Date().getTime());
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(cal.getTime().getTime());
     }
@@ -79,7 +75,7 @@ public class VerificationToken extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "VerificationToken{" +
+        return "PasswordResetToken{" +
                 "token='" + token + '\'' +
                 ", expiryDate=" + expiryDate +
                 '}';

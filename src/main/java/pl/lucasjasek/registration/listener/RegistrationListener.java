@@ -6,19 +6,19 @@ import org.springframework.stereotype.Component;
 import pl.lucasjasek.model.User;
 import pl.lucasjasek.registration.OnRegistrationCompleteEvent;
 import pl.lucasjasek.service.SendEmailService;
-import pl.lucasjasek.service.UserService;
+import pl.lucasjasek.service.VerificationTokenService;
 
 import java.util.UUID;
 
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
-    private final UserService service;
+    private final VerificationTokenService verificationTokenService;
     private final SendEmailService emailService;
 
     @Autowired
-    public RegistrationListener(UserService service, SendEmailService emailService) {
-        this.service = service;
+    public RegistrationListener(VerificationTokenService verificationTokenService, SendEmailService emailService) {
+        this.verificationTokenService = verificationTokenService;
         this.emailService = emailService;
     }
 
@@ -30,7 +30,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     private void confirmRegistration(OnRegistrationCompleteEvent event) {
         User user = event.getUser();
         String token = UUID.randomUUID().toString();
-        service.createVerificationToken(user, token);
+        verificationTokenService.createVerificationToken(user, token);
 
         String confirmationUrl = event.getAppUrl() + "/potwierdzenieRejestracji.html?token=" + token;
         emailService.sendConfirmRegistrationEmail(user, confirmationUrl);

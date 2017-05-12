@@ -9,6 +9,8 @@ public interface SendEmailService {
 
     void sendConfirmRegistrationEmail(User user, String confirmationUrl);
 
+    void sendPasswordResetToken(String token, User user);
+
     void sendEmailWithTemplate(User user, String subject, String text );
 
     void sendEmail(String recipientAddress, String subject, String text );

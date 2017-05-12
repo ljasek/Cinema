@@ -28,8 +28,11 @@ public class SendEmailServiceImpl implements SendEmailService{
 
     private static final String CONFIRM_REGISTRATION_EMAIL_SUBJECT = "Potwierdzenie rejestracji";
     private static final String RESEND_REGISTRATION_TOKEN_SUBJECT = "Potwierdzenie rejestracji - nowy token";
+    private static final String PASSWORD_RESET_SUBJECT = "Reset hasła użytkownika";
     private static final String CONFIRM_REGISTRATION_TEXT = "Kliknij w link aby potwierdzić rejestrację   http://localhost:8080";
+    private static final String PASSWORD_RESET_TEXT = "Kliknij w link aby zresetować hasło   http://localhost:8080";
     private static final String CONFIRMATION_URL = "/CinemaProject/potwierdzenieRejestracji.html?token=";
+    private static final String CHANGE_PASSWORD_URL = "/CinemaProject/zmianaHasla.html?id=";
     private static final String CONFIRMATION_EMAIL_TEMPLATE_NAME = "email/confirmationTemplate";
 
     @Autowired
@@ -48,6 +51,18 @@ public class SendEmailServiceImpl implements SendEmailService{
     public void sendConfirmRegistrationEmail(User user, String confirmationUrl) {
         String emailText = CONFIRM_REGISTRATION_TEXT + confirmationUrl;
         sendEmailWithTemplate(user, CONFIRM_REGISTRATION_EMAIL_SUBJECT, emailText);
+    }
+
+    @Override
+    public void sendPasswordResetToken(String token, User user) {
+        StringBuilder emailText = new StringBuilder();
+        emailText.append(PASSWORD_RESET_TEXT);
+        emailText.append(CHANGE_PASSWORD_URL);
+        emailText.append(user.getUserId());
+        emailText.append("&token=");
+        emailText.append(token);
+
+        sendEmailWithTemplate(user, PASSWORD_RESET_SUBJECT, emailText.toString());
     }
 
     @Async
