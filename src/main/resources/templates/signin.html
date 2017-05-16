@@ -16,12 +16,12 @@
 	<link href="/css/login.css" rel="stylesheet" th:href="@{/css/login.css}" type="text/css" />
 </head>
 <body>
-<h1 class="w3ls">Formularz logowania</h1>
+<h1 class="w3ls"></h1>
 	<div class="content-agileits">
 		<form action="#" th:action="@{/logowanie}" method="post" data-toggle="validator" role="form">
 			<div class="form-group w3layouts w3 w3l">
 				<label for="Username" class="control-label">Nazwa użytkownika</label>
-				<input type="text" roleId="username" class="form-control" id="Username" name="username" placeholder="Nazwa użytkownika" data-error="Podaj nazwę użytkownika" required="required" autofocus="autofocus" />
+				<input type="text" roleId="username" class="form-control" id="Username" name="username" placeholder="Nazwa użytkownika" data-error="Podaj nazwę użytkownika" required="required" />
 				<div class="help-block with-errors"></div>
 			</div>
 			<div class="form-group w3layouts w3 w3l">
@@ -35,11 +35,11 @@
 			<div class="form-group">
 				<button type="submit" class="btn btn-lg">Zaloguj</button>
 			</div>
-			<div class="form-group">
-				<a  class="btn btn-block login-button" th:href="@{/resetHasla}">Nie pamiętasz hasła?</a>
-			</div>
 		</form>
-			<hr />
+		<div class="form-group">
+			<a  class="btn btn-block login-button" th:href="@{/resetHasla}">Nie pamiętasz hasła?</a>
+		</div>
+		<hr />
 		<div class="sp"><span>Nie posiadasz konta?</span></div>
 			<div class="form-group">
 				<a th:href="@{/rejestracja}">

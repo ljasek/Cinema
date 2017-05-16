@@ -44,3 +44,8 @@ spring:
         starttls.enable: true
         starttls.required: true
         auth: true;
+---
+#    4am every day
+cron:
+  purge:
+    expression: 0 0 4 * * ?
