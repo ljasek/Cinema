@@ -7,7 +7,7 @@ In the current version the application allows you to "purchase" tickets to anony
 ## Quickstart
 Run the app:
 
-    In IDE set in server options -> Edit configuration -> VM options:  -Dspring.profiles.active = prod
+    In IDE set in server options -> Edit configuration -> VM options:  -Dspring.profiles.active=prod
     Configure database settings in resources/application.yml
     After run the application and generate the database schema, change hbm2ddl.method to 'update'
     Initialize the database with resources/sql
@@ -17,7 +17,8 @@ Run the app:
     mvn install
     java -jar target/CinemaProject-1.0.1.jar --spring.profiles.active=prod
     
-The app will be available at `http://localhost:8080/CinemaProject/`. 
+The app will be available at `http://localhost:8080/CinemaProject/`
+For https channel the app will be available at `https://localhost:8443/CinemaProject/`
 
 ##### Note
 For proper operation of email sending mechanism it is required to:</br>
