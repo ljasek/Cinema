@@ -1,6 +1,16 @@
 server:
   port: 8080
   contextPath: /CinemaProject
+
+## for https channel
+#server:
+#  port: 8443
+#  contextPath: /CinemaProject
+#  ssl:
+#    key-store: keystore.p12
+#    key-store-password: localhost
+#    keyStoreType: PKCS12
+#    keyAlias: tomcat
 ---
 spring:
   profiles: local,default

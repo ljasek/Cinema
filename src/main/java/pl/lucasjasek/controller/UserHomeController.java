@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.lucasjasek.model.User;
 import pl.lucasjasek.model.security.VerificationToken;
@@ -20,6 +19,7 @@ import pl.lucasjasek.service.SendEmailService;
 import pl.lucasjasek.service.UserService;
 import pl.lucasjasek.service.VerificationTokenService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.UUID;
 
@@ -68,7 +68,7 @@ public class UserHomeController {
     }
 
     @PostMapping("/rejestracja")
-    public String signupPost(@ModelAttribute("user") User user, WebRequest request, Model model, RedirectAttributes ra) {
+    public String signupPost(@ModelAttribute("user") User user, HttpServletRequest request, Model model, RedirectAttributes ra) {
 
         if(userService.checkUserExists(user.getUsername(), user.getEmail()))  {
 
@@ -85,8 +85,7 @@ public class UserHomeController {
 
         User registered = userService.createUser(user);
 
-        String appUrl = request.getContextPath();
-        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
+        eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, getBaseUrl(request)));
 
         ra.addFlashAttribute("alert", CONFIRM_EMAIL);
 
@@ -112,11 +111,11 @@ public class UserHomeController {
     }
 
     @GetMapping("/potwierdzenieRejestracji-nowyToken")
-    public String confirmRegistrationNewToken(@RequestParam("token") String existingToken, RedirectAttributes ra) {
+    public String confirmRegistrationNewToken(@RequestParam("token") String existingToken, HttpServletRequest request, RedirectAttributes ra) {
 
         VerificationToken newToken = verificationTokenService.generateNewVerificationToken(existingToken);
         User user = verificationTokenService.getUser(newToken.getToken());
-        emailService.resendRegistrationToken(newToken, user);
+        emailService.resendRegistrationToken(newToken, user, getBaseUrl(request));
 
         ra.addFlashAttribute("alert", CONFIRM_EMAIL);
 
@@ -133,13 +132,13 @@ public class UserHomeController {
     }
 
     @PostMapping("/resetHasla")
-    public String resetPasswordPost(@ModelAttribute("email") String userEmail, RedirectAttributes ra) {
+    public String resetPasswordPost(@ModelAttribute("email") String userEmail, HttpServletRequest request, RedirectAttributes ra) {
 
         User user = userService.findByEmail(userEmail);
         if (user != null) {
             String token = UUID.randomUUID().toString();
             passwordResetService.createPasswordResetTokenForUser(user, token);
-            emailService.sendPasswordResetToken(token, user);
+            emailService.sendPasswordResetToken(token, user, getBaseUrl(request));
 
             ra.addFlashAttribute("alert", RESET_PASSWORD_EMAIL);
 
@@ -212,5 +211,16 @@ public class UserHomeController {
         userService.saveUser(user);
 
         return "profile";
+    }
+
+    private static String getBaseUrl(HttpServletRequest request) {
+        StringBuilder baseUrl = new StringBuilder();
+        baseUrl.append(request.getScheme());
+        baseUrl.append("://");
+        baseUrl.append(request.getServerName());
+        baseUrl.append((request.getServerPort() == 80) ? "" : ":" + request.getServerPort());
+        baseUrl.append(request.getContextPath());
+
+        return baseUrl.toString();
     }
 }

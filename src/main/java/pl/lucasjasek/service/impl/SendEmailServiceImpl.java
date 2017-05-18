@@ -29,10 +29,10 @@ public class SendEmailServiceImpl implements SendEmailService{
     private static final String CONFIRM_REGISTRATION_EMAIL_SUBJECT = "Potwierdzenie rejestracji";
     private static final String RESEND_REGISTRATION_TOKEN_SUBJECT = "Potwierdzenie rejestracji - nowy token";
     private static final String PASSWORD_RESET_SUBJECT = "Reset hasła użytkownika";
-    private static final String CONFIRM_REGISTRATION_TEXT = "Kliknij w link aby potwierdzić rejestrację   http://localhost:8080";
-    private static final String PASSWORD_RESET_TEXT = "Kliknij w link aby zresetować hasło   http://localhost:8080";
-    private static final String CONFIRMATION_URL = "/CinemaProject/potwierdzenieRejestracji.html?token=";
-    private static final String CHANGE_PASSWORD_URL = "/CinemaProject/zmianaHasla.html?id=";
+    private static final String CONFIRM_REGISTRATION_TEXT = "Kliknij w link aby potwierdzić rejestrację   ";
+    private static final String PASSWORD_RESET_TEXT = "Kliknij w link aby zresetować hasło   ";
+    private static final String CONFIRMATION_URL = "/potwierdzenieRejestracji.html?token=";
+    private static final String CHANGE_PASSWORD_URL = "/zmianaHasla.html?id=";
     private static final String CONFIRMATION_EMAIL_TEMPLATE_NAME = "email/confirmationTemplate";
 
     @Autowired
@@ -42,8 +42,8 @@ public class SendEmailServiceImpl implements SendEmailService{
     }
 
     @Override
-    public void resendRegistrationToken(VerificationToken newToken, User user) {
-        String emailText = CONFIRM_REGISTRATION_TEXT + CONFIRMATION_URL + newToken.getToken();
+    public void resendRegistrationToken(VerificationToken newToken, User user, String appUrl) {
+        String emailText = CONFIRM_REGISTRATION_TEXT + appUrl + CONFIRMATION_URL + newToken.getToken();
         sendEmailWithTemplate(user, RESEND_REGISTRATION_TOKEN_SUBJECT, emailText);
     }
 
@@ -54,9 +54,10 @@ public class SendEmailServiceImpl implements SendEmailService{
     }
 
     @Override
-    public void sendPasswordResetToken(String token, User user) {
+    public void sendPasswordResetToken(String token, User user, String appUrl) {
         StringBuilder emailText = new StringBuilder();
         emailText.append(PASSWORD_RESET_TEXT);
+        emailText.append(appUrl);
         emailText.append(CHANGE_PASSWORD_URL);
         emailText.append(user.getUserId());
         emailText.append("&token=");

@@ -13,6 +13,8 @@ import java.util.UUID;
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
+    private static final String CONFIRM_REGISTRATION_PATH = "/potwierdzenieRejestracji.html?token=";
+
     private final VerificationTokenService verificationTokenService;
     private final SendEmailService emailService;
 
@@ -32,7 +34,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         String token = UUID.randomUUID().toString();
         verificationTokenService.createVerificationToken(user, token);
 
-        String confirmationUrl = event.getAppUrl() + "/potwierdzenieRejestracji.html?token=" + token;
+        String confirmationUrl = event.getAppUrl() + CONFIRM_REGISTRATION_PATH + token;
         emailService.sendConfirmRegistrationEmail(user, confirmationUrl);
     }
 }
