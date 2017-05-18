@@ -17,7 +17,7 @@ Run the app:
     mvn install
     java -jar target/CinemaProject-1.0.1.jar --spring.profiles.active=prod
     
-The app will be available at `http://localhost:8080/CinemaProject/`
+The app will be available at `http://localhost:8080/CinemaProject/`</br>
 For https channel the app will be available at `https://localhost:8443/CinemaProject/`
 
 ##### Note
