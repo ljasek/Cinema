@@ -31,7 +31,7 @@ For proper operation of email sending mechanism it is required to:</br>
 - Adding log in via social networking sites.
 - Adding activate a new account by email (added)
 - More user account functionality
-- Adding http/https channel security
+- Adding http/https channel security (added)
 - Reset password (added)
 - and more...
 
