@@ -1,9 +1,6 @@
 
 # Kino
 
-> Simple application to manage bookings in the cinema.
-In the current version the application allows you to "purchase" tickets to anonymous user or registered user.
-
 ## Quickstart
 Run the app:
 
