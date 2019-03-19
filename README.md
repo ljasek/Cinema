@@ -23,7 +23,7 @@ For proper operation of email sending mechanism it is required to:</br>
 2nd: https://accounts.google.com/b/0/displayunlockcaptcha
 
 ## Plans for further application development
-- Create an administrator module in Angular 2 + TypeScript and solve the problem of manually editing the database.
+- Create an administrator module in Angular and solve the problem of manually editing the database.
 - Adding possibility to reserve a seat for a specified time
 - Adding log in via social networking sites.
 - Adding activate a new account by email (added)
